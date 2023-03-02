@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Create a new config using a base config from sui binaries
+py_create_config() {
+    _PYPATH=$1
+    _CFGSRC=$2
+    _SBCFG=$3
+
+    # echo "$_PYPATH"
+    # echo "$_CFGSRC"
+    # echo "$_SBCFG"
+
+    CR_RES=$(python3 -B -c "import sys;sys.path.insert(0,'$_PYPATH');import new_config;new_config.create_sui_base_cfg_from('$_CFGSRC','$_SBCFG')" 2>&1)
+    echo $CR_RES
+}
+
+py_get_active() {
+    _PYPATH=$1
+    _SBCFG=$2
+
+    # echo "$_PYPATH"
+    # echo "$_SBCFG"
+
+    GC_RES=$(python3 -B -c "import sys;sys.path.insert(0,'$_PYPATH');import new_config;new_config.get_active_env('$_SBCFG')" 2>&1)
+    echo $GC_RES
+}
+
+py_set_active() {
+    _PYPATH=$1
+    _SBCFG=$2
+    _CFG_TO_SET=$3
+
+    # echo "$_PYPATH"
+    # echo "$_SBCFG"
+    # echo "$_CFG_TO_SET"
+
+    SC_RES=$(python3 -B -c "import sys;sys.path.insert(0,'$_PYPATH');import new_config;new_config.set_active_env('$_SBCFG','$_CFG_TO_SET')" 2>&1)
+    echo $SC_RES
+}
+
+# Sample using the python file
+main() {
+
+    SB_PY_PATH="."                                  # Path var for python script location
+    BASE_SRC="~/.sui/sui_config/client.yaml"        # Bootstrap client.yaml
+    SUPER_YAML="sui-base2.yaml"                     # Output configuration
+
+    # Create a config
+    RES=$(py_create_config "$SB_PY_PATH" "$BASE_SRC" "$SUPER_YAML")
+    echo "Result of creating = '$RES'"
+
+    # Get active config
+    RES=$(py_get_active "$SB_PY_PATH" "$SUPER_YAML")
+    echo $RES
+
+    # Set active config
+    RES=$(py_set_active "$SB_PY_PATH" "$SUPER_YAML" "localnet")
+    echo $RES
+}
+main;
