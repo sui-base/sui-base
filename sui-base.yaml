@@ -1,0 +1,30 @@
+active_env: devnet
+envs:
+- active_address: '0xe58c532315dced9d08fcb9c3aab16eac0d7fbc5f'
+  alias: devnet
+  keystore:
+    File: /Users/fastfrank/.sui/sui_config/sui.keystore
+  rpc: https://fullnode.devnet.sui.io:443
+  sui_version: ''
+  ws: wss://fullnode.devnet.sui.io:443
+- active_address: ''
+  alias: localnet
+  keystore:
+    File: ''
+  rpc: http://0.0.0.0:9000
+  sui_version: ''
+  ws: ws://127.0.0.1:9000
+- active_address: ''
+  alias: testnet
+  keystore:
+    File: ''
+  rpc: https://fullnode.testnet.sui.io:443
+  sui_version: ''
+  ws: wss://fullnode.testnet.sui.io:443
+- active_address: ''
+  alias: mainnet
+  keystore:
+    File: ''
+  rpc: http://0.0.0.0:9000
+  sui_version: ''
+  ws: just kidding
